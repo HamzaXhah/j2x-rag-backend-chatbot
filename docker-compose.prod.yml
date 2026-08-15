@@ -37,14 +37,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
-    deploy:
-      resources:
-        limits:
-          cpus: '4'
-          memory: 8G
-        reservations:
-          cpus: '1'
-          memory: 2G
 
   db:
     image: pgvector/pgvector:pg17
@@ -64,14 +56,6 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 2G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
 
   minio:
     image: minio/minio:latest
@@ -90,14 +74,6 @@ services:
       timeout: 20s
       retries: 3
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 2G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
 
 volumes:
   postgres_data:

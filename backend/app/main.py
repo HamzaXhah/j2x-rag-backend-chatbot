@@ -35,6 +35,7 @@ if not os.path.exists(STATIC_DIR):
         logger.error(f"Failed to create static directory: {str(e)}")
 
 from app.api.api import api_router
+from app.api.endpoints.ai_integration import router as ai_router
 from app.core.config import settings
 from app.db.session import get_db
 from app.db.init_db import init_db, init_default_datasources
@@ -79,6 +80,9 @@ async def websocket_endpoint(websocket: WebSocket):
 
 # Include API router
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
+# Include AI integration router (matches j2x-backend/frontend contract)
+app.include_router(ai_router, prefix="/ai", tags=["ai-integration"])
 
 # Mount static files using absolute path
 logger.info(f"Mounting static files from: {STATIC_DIR}")
